@@ -1,0 +1,17 @@
+
+.addProductFormUpdate {
+  margin-top: 20px;
+  display: flex; 
+  flex-wrap: wrap;
+}
+.col-flex {
+  display: flex;
+  flex-direction:column;
+  margin:20px;
+}
+.buttonAddProduct {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
