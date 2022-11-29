@@ -9,15 +9,16 @@ import categoryApi from "../../api/categoryApi";
 import ordersApi from "../../api/ordersApi";
 import { showNotification } from "../../utils/showNotification";
 
-export default function OrdersList() {
+export default function OrdersListNoShipper() {
   const user = useSelector((state) => state.user.currentUser);
+  console.log("user", user);
   let history = useHistory();
   const [data, setData] = useState([]);
 
   useEffect(async () => {
     try {
       if (user) {
-        const res = await ordersApi.getAll();
+        const res = await ordersApi.getordernoshipper();
         if (res !== null && res !== undefined) {
           setData(res);
           console.log(res);
@@ -31,6 +32,13 @@ export default function OrdersList() {
     }
   }, []);
 
+  const fetchData = async () => {
+    const res = await ordersApi.getordernoshipper();
+    if (res !== null && res !== undefined) {
+      setData(res);
+      console.log(res);
+    }
+  };
   useEffect(() => {
     if (!user) {
       history.push("/signin");
@@ -48,21 +56,35 @@ export default function OrdersList() {
     }
   };
 
+  const handleReceiveOrders = async (orderId, username) => {
+    const res = await ordersApi.addshippertoorder(orderId, username);
+    if (res !== undefined && res !== null) {
+      showNotification("success", "Receive Orders successful", "", "OK");
+      await fetchData();
+    } else {
+      showNotification("error", "Receive Orders failed", "", "OK");
+    }
+  };
   const columns = [
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 250,
       renderCell: (params) => {
         return (
           <>
             <Link to={"/order/" + params.row.orderId}>
               <button className="userListEdit">Edit</button>
             </Link>
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(params.row.orderId)}
-            />
+            <button
+              onClick={() =>
+                handleReceiveOrders(params.row.orderId, user.username)
+              }
+              className="userListEdit"
+            >
+              Receive orders
+            </button>
+           
           </>
         );
       },
@@ -163,9 +185,7 @@ export default function OrdersList() {
       headerName: "Shipper",
       width: 150,
       renderCell: (params) => {
-        return (
-          <div className="userListUser">{params.row.shipper}</div>
-        );
+        return <div className="userListUser">{params.row.shipper}</div>;
       },
     },
     {
@@ -173,9 +193,7 @@ export default function OrdersList() {
       headerName: "Delivered Date",
       width: 150,
       renderCell: (params) => {
-        return (
-          <div className="userListUser">{params.row.deliveredDate}</div>
-        );
+        return <div className="userListUser">{params.row.deliveredDate}</div>;
       },
     },
   ];
@@ -190,7 +208,9 @@ export default function OrdersList() {
           getRowId={(row) => row.orderId}
           pageSize={10}
         />
-      ) : <>No Data</>}
+      ) : (
+        <>No Data</>
+      )}
     </div>
   );
 }

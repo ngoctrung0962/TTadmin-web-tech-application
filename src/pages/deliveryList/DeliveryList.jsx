@@ -13,11 +13,11 @@ export default function DeliveryList() {
   const handleDelete = async (id) => {
     try {
       await deliveryApi.remove(id)
-      showNotification('success', 'Great', 'Delete delivery successful', 'OK')
+      showNotification('success', 'Delete delivery successful', '', 'OK')
       const dataFilter = data.filter(item => item.deliveryId !== id)
       setData(dataFilter)
     } catch (error) {
-      showNotification('error', 'Oh no', 'Delete delivery fail', 'OK')
+      showNotification('error', 'Delete delivery fail', '', 'OK')
     }
   };
   const columns = [

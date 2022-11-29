@@ -20,7 +20,7 @@ export default function NewCategory() {
     e.preventDefault();
     const res = await categoryApi.add(formvalues);
     if (res !== undefined && res !== null) {
-      showNotification('success', 'Great', 'Add Category successful', 'OK', () => history.push("/categories") )
+      showNotification('success', 'Add Category successful', '', 'OK', () => history.push("/categories") )
     }
   };
 

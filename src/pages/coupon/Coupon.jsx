@@ -60,11 +60,10 @@ export default function User() {
     try {
       const res = await couponApi.update(couponId, formvalues);
       setCoupon(res);
-      showNotification('success', 'Update succes!!', '', 'OK');
+      showNotification("success", "Update succes!!", "", "OK");
     } catch (error) {
-      showNotification('error', 'Update fail!!', '', 'OK');
+      showNotification("error", "Update fail!!", "", "OK");
     }
-
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +84,7 @@ export default function User() {
           <form className="userUpdateForm" onSubmit={handleSubmit}>
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>CouponId</label>
+                <label>Code</label>
                 <input
                   type="text"
                   value={couponId}
@@ -122,8 +121,8 @@ export default function User() {
                 <input
                   type="date"
                   value={formatDate(coupon.effectiveTime)}
-                  onChange={handleChange}
                   name="effectiveTime"
+                  onChange={handleChange}
                   placeholder={coupon.effectiveTime}
                   className="userUpdateInput"
                 />

@@ -24,19 +24,18 @@ export default function NewCoupon() {
     try {
       const res = await couponApi.add(formvalues);
       console.log(formvalues);
-      showNotification('success', 'Add succes!!', '', 'OK');
+      showNotification("success", "Add succes!!", "", "OK");
       history.push("/coupons");
     } catch (error) {
-      showNotification('error', 'Add fail!!', '', 'OK');
+      showNotification("error", "Add fail!!", "", "OK");
     }
-
   };
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Coupon</h1>
       <form onSubmit={handleSubmit} className="addProductForm">
         <div className="addProductItem">
-          <label>CouponID</label>
+          <label>Code</label>
           <input
             type="text"
             name="couponId"

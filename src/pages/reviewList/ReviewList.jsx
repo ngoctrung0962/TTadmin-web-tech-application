@@ -15,7 +15,7 @@ export default function ReviewList() {
       const dataFilter = data.filter(item => item.reviewId !== id)
       setData(dataFilter)
     } catch (error) {
-      showNotification('success', 'Oh no', 'Delete review fail', 'OK')
+      showNotification('success', 'Delete review fail', '', 'OK')
     }
   };
   const columns = [

@@ -39,14 +39,14 @@ export default function Brand() {
       const res = await brandApi.update(formvalues, brandId);
       if (!res.status || res.status === 200) {
         setBrand(res);
-        showNotification('success', 'Great', 'Update successful', 'OK')
+        showNotification('success', 'Update successful', '', 'OK')
       }
       else {
-        showNotification('error', 'Oh no', 'Update fail', 'OK')
+        showNotification('error', 'Update fail', '', 'OK')
       }
 
     } catch (error) {
-      showNotification('error', 'Oh no', 'Update fail', 'OK')
+      showNotification('error', 'Update fail', '', 'OK')
     }
 
   };
@@ -74,9 +74,9 @@ export default function Brand() {
       const res = await brandApi.uploadfileimage(currenfileimage)
       console.log(res)
       setFormvalues({ ...formvalues, logo: res })
-      showNotification('success', 'Great', 'Add image successful', 'OK')
+      showNotification('success', 'Add image successful', '', 'OK')
     } catch (error) {
-      showNotification('error', 'Oh no', 'Add image fail', 'OK')
+      showNotification('error', 'Add image fail', '', 'OK')
     }
 
   }

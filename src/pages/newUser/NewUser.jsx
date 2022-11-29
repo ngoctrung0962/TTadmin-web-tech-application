@@ -30,12 +30,10 @@ export default function NewUser() {
     );
 
     if (!res.status || res.status === 200) {
-
-      showNotification('success', 'Đăng kí thành công !', 'Vui lòng đăng nhập lại', 'OK')
+      showNotification("success", "Add User successful", "", "OK");
       history.push("/users");
-    }
-    else {
-      showNotification('error', 'Đăng kí thất bại !', `Lỗi: ${res.message}`, 'OK')
+    } else {
+      showNotification("error", "Add user fail !", `Error: ${res.message}`, "OK");
     }
   };
   const handleChange = (e) => {

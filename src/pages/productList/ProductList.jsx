@@ -24,12 +24,12 @@ export default function ProductList() {
     try {
       const res = await productApi.remove(id)
       if (!res.status || res.status === 200) {
-        showNotification('success', 'Great', 'Delete product successful', 'OK')
+        showNotification('success', 'Delete product successful', '', 'OK')
         const dataFilter = data.filter(item => item.productId !== id)
         setData(dataFilter)
       }
       else {
-        showNotification('error', 'Oh no', 'Delete product fail', 'OK')
+        showNotification('error', 'Delete product fail', '', 'OK')
       }
 
     } catch (error) {

@@ -20,10 +20,10 @@ export default function NewDelivery() {
     try {
       const res = await deliveryApi.add(formvalues)
       console.log(formvalues)
-      showNotification('success', 'Great', 'Add delivery successful', 'OK')
+      showNotification('success', 'Add delivery successful', '', 'OK')
       history.push("/deliveries")
     } catch (error) {
-      showNotification('error', 'Oh no', 'Add delivery fail', 'OK')
+      showNotification('error', 'Add delivery fail', '', 'OK')
     }
 
   };

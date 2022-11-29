@@ -12,12 +12,12 @@ export default function BrandList() {
   const handleDelete = async (id) => {
     try {
       await brandApi.remove(id)
-      showNotification('success', 'Great', 'Delete brand successful', 'OK')
+      showNotification('success', 'Delete brand successful', '', 'OK')
       const dataFilter = data.filter(item => item.brandId !== id)
       setData(dataFilter)
     } catch (error) {
       window.alert("Delete brand fail!")
-      showNotification('error', 'Oh no', 'Delete brand fail', 'OK')
+      showNotification('error', 'Delete brand fail', '', 'OK')
     }
   };
   const columns = [

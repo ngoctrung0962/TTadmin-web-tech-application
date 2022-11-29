@@ -15,25 +15,28 @@ import NewBrand from "./pages/newBrand/NewBrand";
 import NewCoupon from "./pages/newCoupon/newCoupon";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import SignIn from './pages/signin/SignIn.page';
+import SignIn from "./pages/signin/SignIn.page";
 import Layout from "./common/layout";
-import CategoriesList from './pages/categoriesList/CategoriesList';
+import CategoriesList from "./pages/categoriesList/CategoriesList";
 import NewCategory from "./pages/newCategory/NewCategory";
-import Category from "./pages/category/Category"
+import Category from "./pages/category/Category";
 import DeliveryList from "./pages/deliveryList/DeliveryList";
 import Delivery from "./pages/delivery/Delivery";
 import NewDelivery from "./pages/newDelivery/NewDelivery";
 import ReviewList from "./pages/reviewList/ReviewList";
-import OrdersList from './pages/ordersList/OrdersList';
-import Order from './pages/order/Order';
-import Profile from './pages/profile/Profile';
+import OrdersList from "./pages/ordersList/OrdersList";
+import Order from "./pages/order/Order";
+import Profile from "./pages/profile/Profile";
+import OrdersListNoShipper from "./pages/ordersListNoShipper/OrdersListNoShipper";
+import OrdersListOfShipper from "./pages/ordersListOfShipper/OrdersListOfShipper";
+import OrdersListOfShipperComplete from "./pages/ordersListOfShipperComplete/OrdersListOfShipperComplete";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
     <Router>
       <Switch>
-        {user && user.role === "ROLE_ADMIN" ?
+        {user && user.role === "ROLE_ADMIN" ? (
           <Layout>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -52,7 +55,7 @@ function App() {
               <Route path="/coupons" component={CouponList} />
               <Route path="/newcoupon" component={NewCoupon} />
               <Route path="/coupon/:couponId" component={Coupon} />
-              
+
               <Route path="/categories" component={CategoriesList} />
               <Route path="/newcategory" component={NewCategory} />
               <Route path="/category/:categoryId" component={Category} />
@@ -72,13 +75,28 @@ function App() {
               <Redirect to="/" />
             </Switch>
           </Layout>
-          :
+        ) : user && user.role === "ROLE_SHIPPER" ? (
+          <Layout>
+            <Switch>
+              <Route path="/ordersnoshipper" component={OrdersListNoShipper} />
+
+              <Route path="/myorders" component={OrdersListOfShipper} />
+              <Route
+                path="/myorderscomplete"
+                component={OrdersListOfShipperComplete}
+              />
+
+              <Route path="/order/:orderId" component={Order} />
+              <Route path="/profile" component={Profile} />
+              <Redirect to="/" />
+            </Switch>
+          </Layout>
+        ) : (
           <Switch>
             <Route path="/signin" component={SignIn} exact />
             <Redirect to="/signin" />
           </Switch>
-
-        }
+        )}
       </Switch>
 
       {/* <Route path="/signin">{user ? <Redirect to="/" /> : <SignIn />}</Route>

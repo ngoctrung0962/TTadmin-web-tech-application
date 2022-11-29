@@ -51,7 +51,7 @@ export default function Category() {
         if (res !== undefined && res !== null) {
             setCategory(res);
             console.log(res);
-            showNotification('success', 'Great', 'Update Category successful', 'OK', () => history.push("/categories"))
+            showNotification('success', 'Update Category successful', '', 'OK', () => history.push("/categories"))
         }
     };
 

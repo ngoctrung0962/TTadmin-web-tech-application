@@ -43,12 +43,12 @@ export default function Product() {
     const res = await productApi.uploadfileimage(formdata);
     if (!res.status || res.status === 200) {
       setFormvalues({ ...formvalues, image: res });
-      showNotification("success", "Great", "Add image successful", "OK");
+      showNotification("success", "Add image successful", "", "OK");
     } else {
       showNotification(
         "error",
-        "Oh No",
         "Add image fail! Error: " + res.message,
+        "",
         "OK"
       );
     }
@@ -64,7 +64,10 @@ export default function Product() {
       brand: {
         brandId: formvalues.brandId,
       },
-      image: currenfileimage && currenfileimage.length ? JSON.stringify(formvalues.image) : formvalues.image,
+      image:
+        currenfileimage && currenfileimage.length
+          ? JSON.stringify(formvalues.image)
+          : formvalues.image,
       quantity: formvalues.quantity,
       saleDate: formvalues.saleDate,
       ram: formvalues.ram,
@@ -84,12 +87,12 @@ export default function Product() {
       const res = await productApi.update(formdata, productId);
       if (!res.status || res.status === 200) {
         setProduct(res);
-        showNotification("success", "Great", "Update successful", "OK");
+        showNotification("success", "Update successful", "", "OK");
       } else {
-        showNotification("error", "Oh no", "Update fail", "OK");
+        showNotification("error", "Update fail", "", "OK");
       }
     } catch (error) {
-      showNotification("error", "Oh no", "Update fail", "OK");
+      showNotification("error", "Update fail", "", "OK");
     }
   };
 
@@ -319,9 +322,9 @@ export default function Product() {
               <span className="productInfoValue">
                 {product
                   ? product.price.toLocaleString("it-IT", {
-                    style: "currency",
-                    currency: "VND",
-                  })
+                      style: "currency",
+                      currency: "VND",
+                    })
                   : "Null"}
               </span>
             </div>

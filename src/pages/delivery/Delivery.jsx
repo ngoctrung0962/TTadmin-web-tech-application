@@ -32,9 +32,9 @@ export default function Delivery() {
         try {
             const res = await deliveryApi.update(formvalues, deliveryId)
             setDelivery(res)
-            showNotification('success', 'Great', 'Update successful', 'OK')
+            showNotification('success', 'Update successful', '', 'OK')
         } catch (error) {
-            showNotification('error', 'Oh no', 'Update fail', 'OK')
+            showNotification('error', 'Update fail', '', 'OK')
         }
 
     };

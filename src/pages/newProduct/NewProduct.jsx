@@ -66,10 +66,10 @@ export default function NewProduct() {
     // }
     const res = await productApi.add(formdata);
     if (!res.status || res.status === 200) {
-      showNotification("success", "Great", "Add product successful", "OK");
+      showNotification("success", "Add product successful", "", "OK");
       history.push("/products");
     } else {
-      showNotification("error", "Oh no", "Add product fail", "OK");
+      showNotification("error", "Add product fail", "", "OK");
     }
   };
   const formatDate = (date) => {
@@ -133,12 +133,12 @@ export default function NewProduct() {
     const res = await productApi.uploadfileimage(formdata);
     if (!res.status || res.status === 200) {
       setFormvalues({ ...formvalues, image: res });
-      showNotification("success", "Great", "Add image successful", "OK");
+      showNotification("success", "Add image successful", "", "OK");
     } else {
       showNotification(
         "error",
-        "Oh No",
         "Add image fail! Error: " + res.message,
+        "",
         "OK"
       );
     }

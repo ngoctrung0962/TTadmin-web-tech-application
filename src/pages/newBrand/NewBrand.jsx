@@ -18,10 +18,10 @@ export default function NewBrand() {
     try {
       const res = await brandApi.add(formvalues)
       console.log(formvalues)
-      showNotification('success', 'Great', 'Add brand successful', 'OK')
+      showNotification('success', 'Add brand successful', '', 'OK')
       history.push("/brands")
     } catch (error) {
-      showNotification('error', 'Oh no', 'Add brand fail', 'OK')
+      showNotification('error', 'Add brand fail', '', 'OK')
     }
 
   };
@@ -35,9 +35,9 @@ export default function NewBrand() {
       const res = await brandApi.uploadfileimage(currenfileimage)
       console.log(res)
       setFormvalues({ ...formvalues, logo: res })
-      showNotification('success', 'Great', 'Add image successful', 'OK')
+      showNotification('success', 'Add image successful', '', 'OK')
     } catch (error) {
-      showNotification('error', 'Oh no', 'Add image fail', 'OK')
+      showNotification('error', 'Add image fail', '', 'OK')
     }
 
   }

@@ -38,7 +38,7 @@ export default function CategoriesList() {
   const handleDelete = async (id) => {
     const res = await categoryApi.remove(id);
     if (res !== undefined && res !== null) {
-      showNotification("success", "Great", "Delete Category successful", "OK");
+      showNotification("success", "Delete Category successful", "", "OK");
       const newData = await categoryApi.getAll();
       if (newData !== undefined && newData !== null) {
         setData(newData);

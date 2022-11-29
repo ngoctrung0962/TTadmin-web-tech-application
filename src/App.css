@@ -1,10 +1,16 @@
-.container{
-    display: flex;
-    margin-top: 10px;
+.container {
+  display: flex;
+  margin-top: 10px;
 }
 
-
-.link{
-    text-decoration: none;
-    color: inherit;
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+.sidebarListItem {
+  text-transform: uppercase;
+  font-size: 16px;
+}
+.userListStatus {
+  background: red;
 }

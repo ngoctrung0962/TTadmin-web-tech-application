@@ -45,7 +45,7 @@ export default function Profile() {
     setFormvalues(res);
     //update user.currentUser
 
-    showNotification("success", "Great", "Update profile success!", "OK");
+    showNotification("success", "Update profile success!", "", "OK");
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,8 +77,8 @@ export default function Profile() {
         console.log(res);
         showNotification(
           "success",
-          "Great",
           "Change password success! Please login again",
+          "",
           "OK"
         );
         dispatch(Logout());

@@ -3,7 +3,7 @@ import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../redux/userRedux";
 import { Link } from "react-router-dom";
 
@@ -20,11 +20,23 @@ export default function Topbar() {
   const handlelogout = () => {
     dispatch(Logout());
   };
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">TechShopAdmin</span>
+          <span
+            className="logo"
+            style={{
+              textTransform: "uppercase",
+              fsontWeight: "bold",
+              fontSize: "30px",
+            }}
+          >
+            {currentUser.role === "ROLE_ADMIN"
+              ? "TechShopAdmin"
+              : "TechShopShipper"}
+          </span>
         </div>
         <div className="topRight">
           {/* <div className="topbarIconContainer">
