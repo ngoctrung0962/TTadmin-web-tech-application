@@ -45,6 +45,8 @@ function App() {
               <Route path="/user/:userId" component={User} />
               <Route path="/newUser" component={NewUser} />
 
+
+
               <Route path="/products" component={ProductList} />
               <Route path="/product/:productId" component={Product} />
               <Route path="/newproduct" component={NewProduct} />

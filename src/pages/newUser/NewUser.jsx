@@ -19,21 +19,55 @@ export default function NewUser() {
     gender: true,
     role: 0,
   };
-
+  const [isCreateShipper, setIsCreateShipper] = useState(false);
+  console.log(isCreateShipper);
   const [formvalues, setFormvalues] = useState(initValue);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await userApi.add(
-      formvalues.username,
-      formvalues.password,
-      formvalues
-    );
+    //Xóa trường role trong formvalues
+    const dataCreateShipe = {
+      username: formvalues.username,
+      password: formvalues.password,
+      name: formvalues.name,
+      email: formvalues.email,
+      phoneNumber: formvalues.phoneNumber,
+      dateOfBirth: formvalues.dateOfBirth,
+      address: formvalues.address,
+      gender: formvalues.gender,
+    };
 
-    if (!res.status || res.status === 200) {
-      showNotification("success", "Add User successful", "", "OK");
-      history.push("/users");
+    if (isCreateShipper) {
+      const res = await userApi.addshipper(dataCreateShipe);
+
+      if (!res.status || res.status === 200) {
+        showNotification("success", "Add Shipper successful", "", "OK");
+        history.push("/users");
+      } else {
+        showNotification(
+          "error",
+          "Add Shipper fail !",
+          `Error: ${res.message}`,
+          "OK"
+        );
+      }
     } else {
-      showNotification("error", "Add user fail !", `Error: ${res.message}`, "OK");
+      const res = await userApi.add(
+        formvalues.username,
+        formvalues.password,
+        formvalues
+      );
+
+      if (!res.status || res.status === 200) {
+        showNotification("success", "Add User successful", "", "OK");
+        history.push("/users");
+      } else {
+        showNotification(
+          "error",
+          "Add user fail !",
+          `Error: ${res.message}`,
+          "OK"
+        );
+      }
     }
   };
   const handleChange = (e) => {
@@ -122,6 +156,19 @@ export default function NewUser() {
             onChange={handleChange}
             required
           />
+        </div>
+        {/* Create shipper radio */}
+        <div className="newUserItem">
+          <label>Create Shipper</label>
+          <div className="newUserRadio">
+            <input
+              type="checkbox"
+              name="isCreateShipper"
+              id="yes"
+              value={isCreateShipper}
+              onChange={() => setIsCreateShipper(!isCreateShipper)}
+            />
+          </div>
         </div>
         <div className="newUserItem">
           <label>Gender</label>

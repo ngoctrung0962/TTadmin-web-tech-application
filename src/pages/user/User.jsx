@@ -37,9 +37,12 @@ export default function User() {
         // update role type 1 is admin, 0 is user
         if (res.role === "ROLE_ADMIN") {
           res.role = 1;
-        } else {
+        } else if (res.role === "ROLE_USER") {
           res.role = 0;
+        } else {
+          res.role = 2;
         }
+
         setUser(res);
         setFormvalues(res);
         console.log(res);
@@ -54,22 +57,27 @@ export default function User() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Role .......", formvalues.role, user.role);
-    const currentRole = user.role === "ROLE_ADMIN" ? 1 : 0;
+    const currentRole =
+      user.role === "ROLE_ADMIN" ? 1 : user.role === "ROLE_USER" ? 0 : 2;
     if (formvalues.role !== currentRole) {
       await userApi.changeRole(username);
       console.log("change role");
     }
+    console.log("a", formvalues);
     const res = await userApi.update(username, formvalues);
     console.log(res);
     // update role type 1 is admin, 0 is user
     if (res.role === "ROLE_ADMIN") {
       res.role = 1;
-    } else {
+    } else if (res.role === "ROLE_USER") {
       res.role = 0;
+    } else {
+      res.role = 2;
     }
+
     setUser(res);
     setFormvalues(res);
-    showNotification('success', 'Update success', '', 'OK');
+    showNotification("success", "Update success", "", "OK");
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -212,7 +220,7 @@ export default function User() {
                   <option value="Khac">Orther</option>
                 </select>
               </div>
-              <div className="userUpdateItem">
+              {/* <div className="userUpdateItem">
                 <label>Role</label>
                 <select
                   id="role"
@@ -223,8 +231,9 @@ export default function User() {
                 >
                   <option value={1}>ROLE_ADMIN</option>
                   <option value={0}>ROLE_USER</option>
+                  <option value={2}>ROLE_SHIPPER</option>
                 </select>
-              </div>
+              </div> */}
             </div>
             <div className="userUpdateRight">
               {/* button back */}
